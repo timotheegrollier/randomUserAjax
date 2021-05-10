@@ -14,16 +14,27 @@ $(document).ready(function () {
       success: (resp) => {
         console.log(resp);
         for (i = 0; i < resp.results.length; i++) {
+          // REPARER L'AGE
+          let age = 18 + Math.floor(Math.random() * 20);
+          if (resp.results[i].dob.age >= 40) {
+            resp.results[i].dob.age = age;
+          }
+          // insertion de nos données récup
           $(
-            "<div class='card'><h1>" +
-              resp.results[i].name.first +
-              " </h1><h4>" +
-              resp.results[i].name.last +
-              "</h4><p>" +
+            "<div class='card'><p>" +
+              resp.results[i].email +
+              "</p>" +
+              "<p>" +
               resp.results[i].gender +
+              "</p><p>Age:" +
+              resp.results[i].dob.age +
               "</p><img src=" +
-              resp.results[i].picture.medium +
-              "></div>"
+              resp.results[i].picture.large +
+              "><h4>" +
+              resp.results[i].name.last +
+              "</h4><h2>" +
+              resp.results[i].name.first +
+              "</h2></div>"
           ).appendTo("#res");
         }
       },
